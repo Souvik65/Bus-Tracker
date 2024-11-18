@@ -10,7 +10,7 @@ const io = socketio(server);
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
-let userLocations = {};
+let userLocations = {}; 
 
 io.on("connection", function (socket) {
     console.log(`User  connected: ${socket.id}`);
@@ -23,10 +23,6 @@ io.on("connection", function (socket) {
         } else {
             console.error("Invalid location data received:", data);
         }
-    });
-
-    socket.on("request-locations", function () {
-        socket.emit("receive-location", userLocations); // Send current locations to the requesting client
     });
 
     socket.on("location-shared", function (busNumber) {
